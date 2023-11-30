@@ -14,12 +14,12 @@ module.exports = () => {
       install: './src/js/install.js'
     },
     output: {
-      filename: 'text-editor.bundle.js',
+      filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: './src/js/index.html',
         title: 'Text Editor'
       }),
       new WebpackPwaManifest({
@@ -30,11 +30,11 @@ module.exports = () => {
         crossorigin: 'use-credentials', 
         icons: [
           {
-            src: path.resolve('./images/logo.png'),
+            src: path.resolve('./src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512] 
           },
           {
-            src: path.resolve('./images/logo.png'),
+            src: path.resolve('./src/images/logo.png'),
             size: '1024x1024' 
           },
           {
@@ -59,13 +59,14 @@ module.exports = () => {
         { 
           test: /\.js$/, 
           exclude: /node_modules/, 
-          use: ['babel-loader'],
-            loader: "babel-loader",
+          use: { 
+            loader: 'babel-loader', 
             options: {
               presets: ["@babel/preset-env"],
               plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/transform-runtime"],
 
             },
+          },   
         },
       ],
     },
